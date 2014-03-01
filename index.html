@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<html>
+<head>
+	<title>JavaMal with 3D Printer</title>
+	<script language="JavaScript">
+<!--
+self.moveTo(0,0) 
+self.resizeTo(screen.availWidth,screen.availHeight) 
+// -->
+
+	
+</script>
+	<script src="parsing(complete).js"></script>
+	<script src="parseCommand.js"></script>
+	<link rel="shortcut icon" href="http://s4.postimg.org/95un4sz3t/javamal_3d_turtle_favicon.gif">
+</head>
+
+
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton:n,b,i,bi|&amp;subset=latin">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
+<style type="text/css">
+
+.classname {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:13px;
+	-moz-border-radius-topleft:13px;
+	border-top-left-radius:13px;
+	-webkit-border-top-right-radius:13px;
+	-moz-border-radius-topright:13px;
+	border-top-right-radius:13px;
+	-webkit-border-bottom-right-radius:13px;
+	-moz-border-radius-bottomright:13px;
+	border-bottom-right-radius:13px;
+	-webkit-border-bottom-left-radius:13px;
+	-moz-border-radius-bottomleft:13px;
+	border-bottom-left-radius:13px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:50px;
+	line-height:50px;
+	width:63px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+}
+.classname:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.classname:active {
+	position:relative;
+	top:1px;
+}
+
+</style>
+<style type="text/css"> 
+.classnames {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:13px;
+	-moz-border-radius-topleft:13px;
+	border-top-left-radius:13px;
+	-webkit-border-top-right-radius:13px;
+	-moz-border-radius-topright:13px;
+	border-top-right-radius:13px;
+	-webkit-border-bottom-right-radius:13px;
+	-moz-border-radius-bottomright:13px;
+	border-bottom-right-radius:13px;
+	-webkit-border-bottom-left-radius:13px;
+	-moz-border-radius-bottomleft:13px;
+	border-bottom-left-radius:13px;
+	text-indent:0.63px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:50px;
+	line-height:50px;
+	width:106px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+}
+.classnames:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.classnames:active {
+	position:relative;
+	top:1px;
+}
+
+
+.blueButton{
+	background:url('http://s28.postimg.org/prrw7jm8d/buttons.png') no-repeat;
+	text-shadow:1px 1px 1px #277c9b;
+	color:#fff !important;
+	width:99px;
+	height:38px;
+	border:none;
+	text-decoration:none;
+	display:inline-block;
+	font-size: 16px;
+	line-height: 32px;
+	text-align: center;
+	margin-top:        10px;
+}
+
+.blueButton:hover,
+.greenButton:hover{
+	background-position:left bottom;
+	text-decoration:none !important;
+}
+
+.blueButton:active{
+	position:relative;
+	bottom:-1px;
+}
+
+.helpmini {
+	background-color:#2da4cf;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #29668f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:arial;
+	font-size:17px;
+	padding:3px 10px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #458296;
+}
+.helpmini:hover {
+	background-color:#51c4d6;
+}
+.helpmini:active {
+	position:relative;
+	top:1px;
+}
+
+        
+   
+        
+
+.xbutton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+	background-color:#f9f9f9;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:arial;
+	font-size:15px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.xbutton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+	background:-moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
+	background-color:#e9e9e9;
+}
+.xbutton:active {
+	position:relative;
+	top:1px;
+}
+
+.small {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background-color:#f9f9f9;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:arial;
+	font-size:15px;
+	padding:8px 14px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+	margin-top:        5px;
+	margin-bottom:        5px;
+}
+.small:hover {
+	background-color:#e9e9e9;
+}
+.small:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+</style>
+
+
+<style>
+body {
+  background-color:#ffffff;
+
+  color:            #000000;
+  font-family:      'Roboto', sans-serif;
+  margin:           0px;
+  margin-left:      7px;
+  margin-right:     7px;
+}
+
+.canvasstyle {
+  background-color: #ffffff;
+  border:2px solid #2478FF;
+}
+
+.buttonstyle {
+  background-color:  #e93;
+  width:             100px;
+  height:            20px;
+  padding:           10px;
+  margin-top:        10px;
+  text-align:        center;
+}
+
+.inputformstyle {
+  background-color: #e1e1e1;
+  color:            #565656;
+  width:            100%;
+ max-width:        640px;
+}
+
+.outputformstyle {
+  background-color: #191919;
+  color:            #6ac0fe;
+  width:            100%;
+ max-width:        640px;
+}
+
+.title {
+  font-family:      'Nanum Gothic', sans-serif;
+  font-weight:      400;
+  font-size:        30px;
+  color: 			#3a96d8;
+
+  padding-top:      20px;
+  padding-bottom:   0px;
+  padding-left:     15px;
+  padding-right:    20px;
+
+  margin-bottom:    10px;
+}
+
+.mainTitle {
+  font-family:      'Anton', sans-serif;
+  font-weight:      100;
+  font-size:        80px;
+  color:			#ffffff;
+  background-color: #3a96d8;
+
+  padding-top:      20px;
+  padding-bottom:   10px;
+  padding-left:     15px;
+  padding-right:    20px;
+
+  width:            100%;
+ max-width:        610px;
+
+  margin-bottom:    10px;
+
+  text-align:       right;
+}
+
+p {
+  font-family:		'Roboto', sans-serif;
+  font-weight:		400;
+  color:			#000000;
+  padding:			0px;
+  margin:			0px;
+  margin-top:		10px;
+  font-size:		12px;
+}
+
+footer {
+  height:			40px;
+  width: auto;
+  max-width:		1000px;
+  padding:			10px;
+  padding-right:	20px;
+  margin-top:		40px;
+  
+  background-color:	#FFFFFF;
+}
+
+p.footer {
+  color:			#787878;
+  text-align:		right;
+}
+
+</style>
+
+
+
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false" onload="init()">
+	<center>
+  <div class="mainTitle">
+  <img src="http://s24.postimg.org/g7jkqoyf9/krist_wood_cube_icon.gif" width="90" height="90">
+   Javamal <span class="genericon genericon-pinned"></span>
+  </div>
+	<form name ="inputform">
+		<div class="title">Command Here</div>
+		<textarea id="income" name="income" rows="6" cols=88 class="inputformstyle">do s</textarea>
+	</form>
+명령어를 입력할 때, 반드시 선언문 뒤에 do명령을 사용하십시오. &nbsp;&nbsp;
+<a style="cursor:pointer" onclick=this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none'; class="helpmini">?</a><DIV style='display:none'>
+<p>
+s: 정육면체<br>
+r: 방향 그대로 오른쪽에 정육면체<br>
+l: 방향 그대로 왼쪽에 정육면체<br>
+u: 방향 그대로 위쪽에 정육면체<br>
+d: 방향 그대로 아래쪽에 정육면체 <br>
+R: 오른쪽으로 돌기  <br>
+L: 왼쪽으로 돌기  <br>
+U: 위로 돌기(미) <br>
+D: 아래로 돌기(미) <br>
+h: 투명한 블럭 <br>
+m: 정사각형 <br>
+[내용]: [ 앞의 위치를 저장해 ]에서 그 위치로 이동 <br>
+(자연수)(내용): 자연수만큼 괄호 안의 내용을 반복 <br>
+v: 정육각기둥(미) <br>
+P: 정오각형(미) <br>
+p: 정육각형(미)<br>
+==================================================<br>
+</p>
+</DIV>
+
+  </br></br></br>
+	
+		<div class="title">Size Here</div>
+		<textarea name="incomes" id="in" rows="2" cols="88" class="inputformstyle">1</textarea>
+		<br>
+    <div class="blueButton" style="cursor:pointer" onclick=run();>Submit</div>
+	
+    <!-- 이 버튼을 통해 모든 실행이 시작됨!--> 
+	
+	<DIV style='display:none' id="new">
+Submit을 먼저 해주세요~!
+</DIV>
+	
+	
+	
+
+  <div class="title">Display</div>
+
+	
+	<script>
+	//document.write("<script type='text/javascript' src='parseCommand.js'><"+"/script>");  
+	var run = function(){
+		gobuttonClick();
+		var size = document.getElementById('in').value;
+		document.getElementById('outs').value = fcode;
+		document.outform.out.value = fcode;
+		parseCommand(fcode,size);
+		print();
+		initialize();
+		document.getElementById('in').value = size;
+	}
+	
+	function read(){
+		var size = document.getElementById('in').value;
+		fcode=document.getElementById('outs').value;
+		parseCommand(fcode,size);
+		print();
+		initialize();
+		}
+		
+		
+	function saveTextAsFile()
+	{
+		var textToWrite = document.getElementById("outn").value;
+		
+		var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+		
+		var fileNameToSaveAs = "Javamath3Dfile.obj";
+
+
+		var downloadLink = document.createElement("a");
+		downloadLink.download = fileNameToSaveAs;
+		downloadLink.innerHTML = "Download File";
+		
+		if (window.webkitURL != null)
+		{
+			// Chrome allows the link to be clicked
+			// without actually adding it to the DOM.
+			downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+		}
+		else
+		{
+			// Firefox requires the link to be added to the DOM
+			// before it can be clicked.
+			downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+			downloadLink.onclick = destroyClickedElement;
+			downloadLink.style.display = "none";
+			document.body.appendChild(downloadLink);
+		}
+
+		downloadLink.click();
+	}
+		
+	</script>
+	<script type="application/x-javascript">
+	
+	
+var g_cubeOBJ = "v 0.5 0.5 0 v 0.5 -0.5 0 v -0.5 0.5 0 v -0.5 -0.5 0 v 0.5 0.5 1 v 0.5 -0.5 1 v -0.5 0.5 1 v -0.5 -0.5 1 v 0.5 1.5 0 v -0.5 1.5 0 v 0.5 1.5 1 v -0.5 1.5 1 v 0.5 2.5 0 v -0.5 2.5 0 v 0.5 2.5 1 v -0.5 2.5 1 f 3 1 2 4 f 4 8 6 2 f 3 7 8 4 f 1 5 7 3 f 2 6 5 1 f 7 5 6 8 f 10 9 1 3 f 3 7 5 1 f 10 12 7 3 f 9 11 12 10 f 1 5 11 9 f 12 11 5 7 f 14 13 9 10 f 10 12 11 9 f 14 16 12 10 f 13 15 16 14 f 9 11 15 13 f 16 15 11 12";
+var g_cubeOBJparsed = g_cubeOBJ.split(" ");
+
+var g_ctx;
+var g_renderEngine;
+var g_testObject;
+var g_camera;
+var g_clipSpace;
+var g_FPSManager;
+
+var g_keyPressed = [];
+
+var g_canvasWidth = 700;
+var g_canvasHeight = 500;
+
+var g_MonkeySpin = 0;
+var g_frameCount = 0;
+
+function Matrix(){
+
+var tempArray=new Array(4)
+var arrayCount;
+for (arrayCount=0; arrayCount<4; arrayCount++)
+tempArray[arrayCount]=new Array(4)
+
+var rowCount, columnCount;
+
+for (rowCount = 0; rowCount < 4; rowCount++)
+    for (columnCount = 0; columnCount < 4; columnCount++)
+    {
+    	    if (columnCount != rowCount ) {
+    	    tempArray[rowCount][columnCount] = 0; 	    
+    	    } else {
+    	    	tempArray[rowCount][columnCount] = 1;     
+    	    }
+    	    
+    }
+
+
+return tempArray;
+}
+
+
+function Normal(x,y,z){
+	
+  this.x = x;
+  this.y = y;
+  this.z = z;
+	
+}
+
+function Vertex(x,y,z){
+
+  this.x = x;
+  this.y = y;
+  this.z = -z;
+  this.w = 4;
+
+}
+
+function Polygon(verticesArray){
+	
+	this.vertex = verticesArray;
+	//this.color = "rgba(0,0,200, 0.5)";
+	//this.color = "rgba("+Math.round(Math.random()*255)+", "+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+", 0.5)";
+	this.color = "rgba(240,80,80, 1)";
+}
+
+function FPSManager(){
+ 	this.dateNow; 	 
+ 	this.timeNow;
+ 	this.timeLater;
+ 	this.update = function(){
+ 		
+ 		this.dateNow = new Date();
+ 		this.timeNow = this.dateNow.getTime();
+        g_ctx.fillText(1000/(this.timeNow-this.timeLater), 10, 50);
+         this.timeLater = this.timeNow;
+ 	} 	 	 
+}
+
+function Object(){
+	
+	  //this.verticesBuffer = [];
+  	  //this.indicesBuffer = [];
+  	  this.verticesArray = [];
+  	  this.polygonsArray = [];
+  	  this.centroidVerticesArray = [];
+  	  this.transformMatrix = new Matrix();
+  	  this.normalsArray = [];
+  	  
+  	  
+  	  	  
+  	  this.computeCentroid = function(){
+  	  	  
+  	   var averageX, averageY, averageZ;
+  	   var polygonCount;
+  	   var vertexCount;
+  	   
+  	   for (polygonCount = 0; polygonCount < this.polygonsArray.length; polygonCount++)
+  	   {
+  	   	   averageX = 0.0;
+  	   	   averageY = 0.0;
+  	   	   averageZ = 0.0;
+  	   	   
+  	   	   for (vertexCount = 0; vertexCount < this.polygonsArray[polygonCount].vertex.length; vertexCount++) {
+  	   	   	   averageX += this.polygonsArray[polygonCount].vertex[vertexCount].x;
+  	   	   	  averageY += this.polygonsArray[polygonCount].vertex[vertexCount].y;
+  	   	   	  averageZ += this.polygonsArray[polygonCount].vertex[vertexCount].z;
+  	    
+  	   	   }
+  	   	  
+  	   	   averageX = averageX / this.polygonsArray[polygonCount].vertex.length;
+  	   	   averageY = averageY / this.polygonsArray[polygonCount].vertex.length;
+  	   	   averageZ = averageZ / this.polygonsArray[polygonCount].vertex.length;
+  	    
+  	   
+  	    this.centroidVerticesArray.push( new Vertex(averageX,averageY,averageZ));
+  	   }
+  	  	  
+  	  }
+
+  	  
+  	  
+          this.loadOBJ = function(){
+          	  
+          	  var dataCount;
+          	  var verticesCount;
+          	  var verticesArray = [];
+          	   
+          	  for (dataCount = 0; dataCount < g_cubeOBJparsed.length; dataCount++)
+          	  {
+          	  	  if (g_cubeOBJparsed[dataCount] == "v"){
+          	  	   this.verticesArray.push(new Vertex(parseFloat(g_cubeOBJparsed[dataCount+1]),
+          	  	   	                              parseFloat(g_cubeOBJparsed[dataCount+2]),
+          	  	   	                              parseFloat(g_cubeOBJparsed[dataCount+3])));
+          	  	  }
+          	  	  
+          	  	   if (g_cubeOBJparsed[dataCount] == "f"){
+          	  	   	   
+          	  	   	      
+          	  	   	   verticesArray = [];
+          	  	   	   verticesCount = dataCount+1;
+          	  	   	   
+          	  	   	    while (g_cubeOBJparsed[verticesCount] != "f" && verticesCount < g_cubeOBJparsed.length ) {
+          	  	   	       	   
+          	  	   	        
+          	  	   	    	    verticesArray.push(this.verticesArray[g_cubeOBJparsed[verticesCount]-1]);   
+          	  	   	   	verticesCount = verticesCount+1;  
+          	  	   	   	
+          	  	   	   
+          	  	   	        }
+          	  	   	        
+          	  	   	     this.polygonsArray.push(new Polygon(verticesArray));   
+          	  	   	        
+          	  	   	   }
+          	  	   	   
+          	  	   	   
+          	  	   	}
+         
+          	  
+          	this.computeCentroid();
+          	  
+          }
+          
+  	  
+  	  
+  
+  }
+  
+function Camera(){
+	
+	this.transformMatrix = new Matrix(); 
+  
+  }
+  
+function RenderEngine(){
+   this.clipSpace = new Matrix();
+   this.clipSpace = [ [1.305, 0, 0, 0],
+   	              [0, 1.740, 0, 0],
+   	              [0, 0, 1.002, 1],
+   	              [0,0,-2.002, 0]
+                     ];
+                
+   this.render = function(){
+   	   
+   	 var polygonCount;
+ 	 var zClip;
+         var zDepthOfPolygons = [];
+         var zDepthOfPolygonsSorted = [];
+         var polygonIndicesDepthSorted = [];
+ 	 	 
+ 	 var finalMatrix = MatrixMultiplication(g_testObject.transformMatrix,g_camera.transformMatrix);
+ 	 
+ 	 finalMatrix = MatrixMultiplication(finalMatrix, this.clipSpace);
+         
+ 	 for (polygonCount = 0; polygonCount < g_testObject.polygonsArray.length;polygonCount++)
+ 	 {
+ 	 	 zClip = g_testObject.centroidVerticesArray[polygonCount].x*finalMatrix[0][2] 
+ 	 	         + g_testObject.centroidVerticesArray[polygonCount].y*finalMatrix[1][2] 
+ 	 	         + g_testObject.centroidVerticesArray[polygonCount].z*finalMatrix[2][2] 
+ 	 	         + g_testObject.centroidVerticesArray[polygonCount].w*finalMatrix[3][2];
+ 	 	         
+ 	 	 zDepthOfPolygons.push(zClip);
+ 	 }
+ 	 
+
+         zDepthOfPolygonsSorted = zDepthOfPolygons.slice();
+         zDepthOfPolygonsSorted.sort(function(a,b){return a - b});
+         
+         var sortCount, chaosCount;
+
+         for (sortCount = 0; sortCount < zDepthOfPolygonsSorted.length; sortCount++)
+         {
+          for (chaosCount = 0; chaosCount < zDepthOfPolygons.length; chaosCount++)
+          {
+          	  if (zDepthOfPolygonsSorted[sortCount] == zDepthOfPolygons[chaosCount])
+          	  {
+          	   polygonIndicesDepthSorted.push(chaosCount);
+          	   zDepthOfPolygons[chaosCount] = 0;
+          	  	  
+          	  }
+          }
+         }
+ 
+         var drawingPolygon;
+         var xScreen = [];
+         var yScreen = [];
+         var clipVertex;
+         var vertexCount;
+          for (polygonCount = 0; polygonCount < polygonIndicesDepthSorted.length;polygonCount++)
+ 	 {
+ 	  drawingPolygon = g_testObject.polygonsArray[polygonIndicesDepthSorted[polygonCount]];
+ 	  xScreen = [];
+ 	  yScreen = [];
+ 	  
+ 	  for (vertexCount = 0; vertexCount < drawingPolygon.vertex.length; vertexCount++)
+ 	      {
+ 	      	      clipVertex = vertexMultiplication(drawingPolygon.vertex[vertexCount],finalMatrix);
+ 	      	      xScreen.push ( (clipVertex.x*g_canvasWidth)/(2*clipVertex.w) + g_canvasWidth/2 );
+ 	      	      yScreen.push ( (clipVertex.y*g_canvasHeight)/(2*clipVertex.w) + g_canvasHeight/2 );
+ 	      }
+ 	      
+ 	      
+ 	     this.drawPolygon(xScreen,yScreen,drawingPolygon.color); 
+ 	      
+ 	 }
+ 	 
+ 	 
+ 
+   	   
+   	   
+   	   
+   }
+   
+   
+   this.drawPolygon = function(xCoords,yCoords, color){
+   	   
+   	   var coordsCounter = xCoords.length;
+   	   
+ 	 	 g_ctx.fillStyle = color;
+ 	 	 
+ 	 	 
+         g_ctx.beginPath();
+         g_ctx.moveTo(xCoords[0],yCoords[0]);
+         for (coordsCounter = 1; coordsCounter < xCoords.length; coordsCounter++) 
+             g_ctx.lineTo(xCoords[coordsCounter],yCoords[coordsCounter]);
+        
+         
+         g_ctx.moveTo(xCoords[0],yCoords[0]);
+         g_ctx.stroke();
+         g_ctx.fill();
+         g_ctx.closePath();
+          
+ 	 	 
+ 	 	 
+ 	 }
+   
+   
+   
+   
+  }
+  
+
+  
+
+function TranslationMatrix(x,y,z) {
+	
+
+var outputMatrix = new Matrix();
+
+outputMatrix[3][0] = x;
+outputMatrix[3][1] = y;
+outputMatrix[3][2] = z;
+
+
+    return outputMatrix;
+     
+}
+
+function vertexMultiplication(vertex,matrix){
+
+var outputVertex = new Vertex(0,0,0);
+
+outputVertex.x = vertex.x*matrix[0][0]+vertex.y*matrix[1][0]+vertex.z*matrix[2][0]+vertex.w*matrix[3][0];
+outputVertex.y = vertex.x*matrix[0][1]+vertex.y*matrix[1][1]+vertex.z*matrix[2][1]+vertex.w*matrix[3][1];
+outputVertex.z = vertex.x*matrix[0][2]+vertex.y*matrix[1][2]+vertex.z*matrix[2][2]+vertex.w*matrix[3][2];
+outputVertex.w = vertex.x*matrix[0][3]+vertex.y*matrix[1][3]+vertex.z*matrix[2][3]+vertex.w*matrix[3][3];
+
+return outputVertex;
+
+}
+  
+function MatrixMultiplication(MatrixA,MatrixB) {
+	
+var rowCount, columnCount;
+var outputMatrix = new Matrix();
+
+for (rowCount = 0; rowCount < 4; rowCount++)
+    for (columnCount = 0; columnCount < 4; columnCount++) {
+    	    
+    	    outputMatrix[rowCount][columnCount] = MatrixA[rowCount][0]*MatrixB[0][columnCount] +
+    	                                          MatrixA[rowCount][1]*MatrixB[1][columnCount] +
+    	                                          MatrixA[rowCount][2]*MatrixB[2][columnCount] +
+    	                                          MatrixA[rowCount][3]*MatrixB[3][columnCount];
+	
+    }
+
+    return outputMatrix;
+     
+}
+
+
+function RotationXMatrix(angle) {
+	
+
+var outputMatrix = new Matrix();
+
+
+outputMatrix[0][0] = 1;
+outputMatrix[0][1] = 0;
+outputMatrix[0][2] = 0;
+outputMatrix[0][3] = 0;
+outputMatrix[1][0] = 0;
+outputMatrix[1][1] = Math.cos(angle);
+outputMatrix[1][2] = Math.sin(angle);
+outputMatrix[1][3] = 0;
+outputMatrix[2][0] = 0;
+outputMatrix[2][1] = -Math.sin(angle);
+outputMatrix[2][2] = Math.cos(angle);
+outputMatrix[2][3] = 0;
+outputMatrix[3][0] = 0;
+outputMatrix[3][1] = 0;
+outputMatrix[3][2] = 0;
+outputMatrix[3][3] = 1;
+
+return outputMatrix;
+     
+}
+
+
+function RotationYMatrix(angle) {
+	
+
+var outputMatrix = new Matrix();
+
+outputMatrix[0][0] = Math.cos(angle);
+outputMatrix[0][1] = 0;
+outputMatrix[0][2] = -Math.sin(angle);
+outputMatrix[0][3] = 0;
+outputMatrix[1][0] = 0;
+outputMatrix[1][1] = 1;
+outputMatrix[1][2] = 0;
+outputMatrix[1][3] = 0;
+outputMatrix[2][0] = Math.sin(angle);
+outputMatrix[2][1] = 0;
+outputMatrix[2][2] = Math.cos(angle);
+outputMatrix[2][3] = 0;
+outputMatrix[3][0] = 0;
+outputMatrix[3][1] = 0;
+outputMatrix[3][2] = 0;
+outputMatrix[3][3] = 1;
+
+return outputMatrix;
+     
+}
+
+
+function RotationZMatrix(angle) {
+	
+
+var outputMatrix = new Matrix();
+
+
+
+outputMatrix[0][0] = Math.cos(angle);
+outputMatrix[0][1] = Math.sin(angle);
+outputMatrix[0][2] = 0;
+outputMatrix[0][3] = 0;
+outputMatrix[1][0] = -Math.sin(angle);
+outputMatrix[1][1] = Math.cos(angle);
+outputMatrix[1][2] = 0;
+outputMatrix[1][3] = 0;
+outputMatrix[2][0] = 0;
+outputMatrix[2][1] = 0;
+outputMatrix[2][2] = 1;
+outputMatrix[2][3] = 0;
+outputMatrix[3][0] = 0;
+outputMatrix[3][1] = 0;
+outputMatrix[3][2] = 0;
+outputMatrix[3][3] = 1;
+
+
+return outputMatrix;
+     
+}
+  
+function initialize() {
+ g_cubeOBJ = "v 0.5 0.5 0 v 0.5 -0.5 0 v -0.5 0.5 0 v -0.5 -0.5 0 v 0.5 0.5 1 v 0.5 -0.5 1 v -0.5 0.5 1 v -0.5 -0.5 1 v 0.5 1.5 0 v -0.5 1.5 0 v 0.5 1.5 1 v -0.5 1.5 1 v 0.5 2.5 0 v -0.5 2.5 0 v 0.5 2.5 1 v -0.5 2.5 1 f 3 1 2 4 f 4 8 6 2 f 3 7 8 4 f 1 5 7 3 f 2 6 5 1 f 7 5 6 8 f 10 9 1 3 f 3 7 5 1 f 10 12 7 3 f 9 11 12 10 f 1 5 11 9 f 12 11 5 7 f 14 13 9 10 f 10 12 11 9 f 14 16 12 10 f 13 15 16 14 f 9 11 15 13 f 16 15 11 12";
+ g_cubeOBJparsed = g_cubeOBJ.split(" ");
+
+g_ctx='0';
+g_renderEngine='0';
+g_testObject='0';
+g_camera='0';
+g_clipSpace='0';
+g_FPSManager='0';
+g_keyPressed = [];
+g_canvasWidth = 700;
+g_canvasHeight = 500;
+
+var g_MonkeySpin = 0;
+var g_frameCount = 0;
+
+	g_cubeOBJ = document.outform.out.value.trim();
+    g_cubeOBJparsed = g_cubeOBJ.split(" ");
+	document.getElementById('in').innerHTML = document.getElementById("out").innerHTML;
+g_ctx = document.getElementById("canvas").getContext("2d");
+//g_ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+
+g_testObject = new Object();
+g_camera = new Camera();
+
+//g_clipSpace = initializeClipSpace();
+//g_FPSManager = new FPSManager();
+g_renderEngine = new RenderEngine();
+
+//window.document.onkeypress = onKeyPress;
+  window.document.onkeydown = onKeyDown;
+  window.document.onkeyup = onKeyUp;
+
+g_testObject.loadOBJ();
+  g_testObject.transformMatrix = RotationXMatrix(1.57);
+   g_testObject.transformMatrix = MatrixMultiplication(g_testObject.transformMatrix,RotationYMatrix(g_MonkeySpin));
+  g_testObject.transformMatrix = MatrixMultiplication(g_testObject.transformMatrix,TranslationMatrix(0,0,-5));
+//g_testObject.transformMatrix = TranslationMatrix(0,0,-5);
+//g_testObject.transformMatrix = RotationXMatrix(1);
+  //g_testObject.transformMatrix = RotationXMatrix(g_testZ);
+   //   g_testObject.transformMatrix = MatrixMultiplication(g_testObject.transformMatrix,TranslationMatrix(0,0,-3));
+    //  g_camera.transformMatrix = new Matrix();
+
+//g_renderEngine.render();
+
+//60 FPS? Ha, I wish
+setInterval(nextFrame, 16.67);
+}
+
+var xr=1.57;
+var yr=3.17;
+var see=-4;
+function nextFrame() {
+
+        g_frameCount++;
+        
+        g_ctx.clearRect(0,0,g_canvasWidth,g_canvasHeight);
+g_testObject.transformMatrix = new Matrix();
+       g_testObject.transformMatrix = RotationXMatrix(xr);
+   g_testObject.transformMatrix = MatrixMultiplication(g_testObject.transformMatrix,RotationYMatrix(yr));
+  
+  g_testObject.transformMatrix = MatrixMultiplication(g_testObject.transformMatrix,TranslationMatrix(0,0,see));
+    
+      
+      
+        g_renderEngine.render();
+        //g_FPSManager.update();
+     
+     
+    }
+
+
+
+/**
+ * A key is being held down, so handle it
+ */
+function onKeyDown(event) {
+  event = event || window.event;
+  g_keyPressed[event.keyCode] = true;
+}
+
+
+
+
+
+/**
+ * A key has been released, so handle it
+ */
+function onKeyUp(event) {
+  event = event || window.event;
+  g_keyPressed[event.keyCode] = false;
+}
+
+var can, ctx, canX, canY, mouseIsDown = 0;// 터치 구현 By 박재영
+
+        function init() {
+            can = document.getElementById("canvas");
+            ctx = can.getContext("2d");
+  can.addEventListener('mousewheel',function(event){
+    mouseController.wheel(event);
+    return false;
+}, false);
+            can.addEventListener("mousedown", mouseDown, false);
+            can.addEventListener("mousemove", mouseXY, false);
+            can.addEventListener("touchstart", touchDown, false);
+            can.addEventListener("touchmove", touchXY, true);
+            can.addEventListener("touchend", touchUp, false);
+ 
+            document.body.addEventListener("mouseup", mouseUp, false);
+            document.body.addEventListener("touchcancel", touchUp, false);
+        }
+ var oldx=10,oldy=10;
+       var can, ctx, canX, canY, mouseIsDown = 0;
+		var oldx,oldy;
+        function init() {
+            can = document.getElementById("canvas");
+            ctx = can.getContext("2d");
+ 
+            can.addEventListener("mousedown", mouseDown, false);
+            can.addEventListener("mousemove", mouseXY, false);
+            can.addEventListener("touchstart", touchDown, false);
+            can.addEventListener("touchmove", touchXY, true);
+            can.addEventListener("touchend", touchUp, false);
+ 
+            document.body.addEventListener("mouseup", mouseUp, false);
+            document.body.addEventListener("touchcancel", touchUp, false);
+        }
+ 
+        function mouseUp() {
+            mouseIsDown = 0;
+            mouseXY();
+        }
+ 
+        function touchUp() {
+            mouseIsDown = 0;
+            // no touch to track, so just show state
+            showPos();
+        }
+ 
+        function mouseDown() {
+            mouseIsDown = 1;
+            mouseXY();
+        }
+ 
+        function touchDown() {
+            mouseIsDown = 1;
+            touchXY();
+        }
+ 
+        function mouseXY(e) {
+            if (!e)
+                var e = event;
+			oldx=canX;
+			oldy=canY;
+            canX = e.pageX - can.offsetLeft;
+            canY = e.pageY - can.offsetTop;
+            showPos();
+        }
+ 
+        function touchXY(e) {
+            if (!e)
+                var e = event;
+			oldx=canX;
+			oldy=canY;
+            e.preventDefault();
+            canX = e.targetTouches[0].pageX - can.offsetLeft;
+            canY = e.targetTouches[0].pageY - can.offsetTop;
+            showPos();
+        }
+ 
+        function showPos() {
+            // large, centered, bright green text
+
+            if (mouseIsDown){
+                yr=yr-(canX-oldx)/640;
+				xr=xr-(canY-oldy)/480;
+				}
+            if (!mouseIsDown)
+                {}
+ ;
+        }
+
+
+function zplus(){
+	see+=0.1;
+}
+function zminus(){
+	see-=0.1;
+}
+
+	
+	
+	
+</script>
+
+
+<body>
+  <canvas id="canvas" class="canvasstyle" width="640" height="500">
+    <p>This example requires a browser that supports the
+    <a href="http://www.w3.org/html/wg/html5/">HTML5</a>
+    &lt;canvas&gt; feature.</p>
+  </canvas>
+  </br>
+  <a onclick="zplus()" class="small">+</a>
+  <a onclick="zminus()" class="small">-</a>
+
+  </br>
+  <a onclick="toDataURL();" class="xbutton">Save Screen</a>
+  <img id="Preview">
+  
+  <script type="text/javascript">
+  function toDataURL(){
+  var Preview = document.getElementById('Preview');
+  Preview.src = canvas.toDataURL();
+  }
+  </script>
+  <!--<div onclick = "initialize();" class="buttonstyle">Show</div>-->
+  
+  <form name="outformn">
+	<div class="title" style="margin-top:20px;">Current Code</div>
+	<textarea  id="outn" name="outn" rows="10" cols="88" onclick="this.select()" onfocus="this.select()" class="outputformstyle" style="margin-top:10px;"></textarea>
+
+	<br>
+	<a onclick="saveTextAsFile()" class="xbutton">↓ Download obj</a>
+	</form>
+	 
+	<form name="outform" style="display:none;">
+	<textarea  id="out" name="out" rows="" cols="88" class="outputformstyle" style="margin-top:40px;"></textarea>
+	</form>
+ 
+	<form name="outforms">
+	<textarea  id="outs" name="out" rows="3" cols="88" class="outputformstyle" style="margin-top:40px;"></textarea> <!--파싱코드 테스트판 추가 By.박재영-->
+	<br><div class="blueButton" style="cursor:pointer" onclick=read();>Parsedcode</div>
+	</form>
+  
+<tr>
+<td colspan="8" height="800" align="center" style="padding-top:100px;">
+<div class="title">Board</div>
+
+	<iframe src="http://uj06102.dothome.co.kr/gnuboard4/"
+	width="1080" frameborder="0"  height="600"></iframe>
+
+</td>
+</tr>
+  
+  <footer>
+	<p class="footer">made by. 서울대학교 영재교육원 사사반</p>
+  </footer>
+</body>
+	
+
+		
+	
+</body>
+</html>
