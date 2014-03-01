@@ -9,3 +9,4 @@ JavaMAL-JS
 ==========
 
 윤재연(jaeyeun97@gmail.com)
+장영재(elite1111cyj@gmail.com)
