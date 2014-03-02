@@ -15,27 +15,29 @@
         <script src="parseCommand.js"></script>
         <script src='main.js'></script>
         <link rel="shortcut icon" href="http://s4.postimg.org/95un4sz3t/javamal_3d_turtle_favicon.gif">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton:n,b,i,bi|&amp;subset=latin">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <link href="flat-ui.css" rel="stylesheet">
     </head>
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Anton:n,b,i,bi|&amp;subset=latin">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" type="text/css" href="main.css">
-    
     <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false" onload="init()">
         <center>
         <div class="mainTitle">
-            <img src="http://s24.postimg.org/g7jkqoyf9/krist_wood_cube_icon.gif" width="90" height="90">
+            <img src="http://s27.postimg.org/rqc7c6roj/logo_30.png" width="90" height="90">
             Javamal <span class="genericon genericon-pinned"></span>
         </div>
         <form name ="inputform">
             <div class="title">Command Here</div>
-            <textarea id="income" name="income" rows="6" cols=88 class="inputformstyle">do s</textarea>
+            <textarea id="income" name="income" rows="6" style="height:60px; margin-top:10px; margin-bottom:10px;" cols=88 class="form-control">do s</textarea>
         </form>
-        명령어를 입력할 때, 반드시 선언문 뒤에 do명령을 사용하십시오. &nbsp;&nbsp;
-        <a style="cursor:pointer" onclick=this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none'; class="helpmini">?</a>
-        <DIV style='display:none'>
+        <a onclick=run(); style="cursor:pointer;" class="btn btn-block btn-lg btn-info">Submit</a>
+        <a onclick="this.innerHTML=(this.nextSibling.style.display=='none')?'▲':'?';this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none'"; style="cursor:pointer; width: 10px; height:10px;" class="btn btn-block btn-lg btn-primary">?</a>
+        <div style='width:100%; max-width:640px; display:none; background-color:#ECF0F1;'>
             <p>
+                ※ 명령어를 입력할 때, 반드시 선언문 뒤에 do명령을 사용하십시오.<br><br>
                 s: 정육면체<br>
+                t: 뒤로 정육면체<br>
                 r: 방향 그대로 오른쪽에 정육면체<br>
                 l: 방향 그대로 왼쪽에 정육면체<br>
                 u: 방향 그대로 위쪽에 정육면체<br>
@@ -53,56 +55,61 @@
                 p: 정육각형(미)<br>
                 ==================================================<br>
             </p>
-        </DIV>
-        </br></br></br>
-        <div class="title">Size Here</div>
-        <textarea name="incomes" id="in" rows="2" cols="88" class="inputformstyle">1</textarea>
-        <br>
-        <div class="blueButton" style="cursor:pointer" onclick=run();>Submit</div>
+        </div>
+        </br></br>
+        <!-- <div class="blueButton" style="cursor:pointer" onclick=run();>Submit</div> -->
         <!-- 이 버튼을 통해 모든 실행이 시작됨!--> 
-        <DIV style='display:none' id="new">
+        <div style='display:none' id="new">
             Submit을 먼저 해주세요~!
-        </DIV>
-        <div class="title">Display> </div>
-        <canvas id="canvas" class="canvasstyle" width="640" height="500">
-            <p>This example requires a browser that supports the
-                <a href="http://www.w3.org/html/wg/html5/">HTML5</a>
-                &lt;canvas&gt; feature.
-            </p>
-        </canvas>
-        </br>
-        <a onclick="zplus()" class="small">+</a>
-        <a onclick="zminus()" class="small">-</a>
-        </br>
-        <a onclick="toDataURL();" class="xbutton">Save Screen</a>
+        </div>
+        <br><br>
+        <table>
+            <tr>
+                <td bgcolor="#3a96d8" align=center style="border-radius: 6px;">
+                    <div class="title" style="color: #ffffff;">3D Display</div>
+                    <canvas id="canvas" class="canvasstyle" width="640" height="500" style="cursor:move; margin-left: 4px; margin-bottom: 10px;">
+                        <p>This example requires a browser that supports the
+                            <a href="http://www.w3.org/html/wg/html5/">HTML5</a>
+                            &lt;canvas&gt; feature.
+                        </p>
+                    </canvas>
+                    <br>
+                    <a onclick="zminus()" class="btn btn-block btn-lg btn-default" style="height:25px; cursor:pointer;" >-</a>
+                    <textarea name="incomes" value="1" id="in" rows="2" cols="88" onchange="if(document.getElementById('in').value==''){document.getElementById('in').value=1} else{see=document.getElementById('in').value-5}" class="form-control" style="vertical-align:middle; width: 50px; height:25px; margin-bottom:0px; resize: none;">1</textarea>
+                    <a onclick="zplus()" class="btn btn-block btn-lg btn-default" style="height:25px; cursor:pointer;" >+</a>
+                    <br><br>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <a onclick="toDataURL();" style="cursor:pointer" class="btn btn-block btn-lg btn-default">Save Screen</a>
         <img id="Preview">
         <script type="text/javascript">
             function toDataURL(){
-                var Preview = document.getElementById('Preview');
-                Preview.src = canvas.toDataURL();
+            var Preview = document.getElementById('Preview');
+            Preview.src = canvas.toDataURL();
             }
         </script>
         <!--<div onclick = "initialize();" class="buttonstyle">Show</div>-->
         <form name="outformn">
             <div class="title" style="margin-top:20px;">Current Code</div>
-            <textarea  id="outn" name="outn" rows="10" cols="88" onclick="this.select()" onfocus="this.select()" class="outputformstyle" style="margin-top:10px;"></textarea>
+            <textarea  id="outn" name="outn" rows="10" cols="88"  class="form-control" style="background-color: #34495e; color: #ffffff; height:100px; margin-top:10px; margin-bottom:10px;"></textarea>
             <br>
-            <a onclick="saveTextAsFile()" class="xbutton">↓ Download obj</a>
+            <a onclick="saveTextAsFile()" style="cursor:pointer" class="btn btn-block btn-lg btn-inverse">↓ Download obj</a>
         </form>
         <form name="outform" style="display:none;">
             <textarea  id="out" name="out" rows="" cols="88" class="outputformstyle" style="margin-top:40px;"></textarea>
         </form>
         <form name="outforms">
-            <textarea  id="outs" name="out" rows="3" cols="88" class="outputformstyle" style="margin-top:40px;"></textarea>
+            <textarea  id="outs" name="out" rows="3" cols="88" class="form-control" style="background-color: #34495e; color: #ffffff; margin-top:40px; margin-bottom:10px;"></textarea>
             <!--파싱코드 테스트판 추가 By.박재영-->
-            <br>
-            <div class="blueButton" style="cursor:pointer" onclick=read();>Parsedcode</div>
+            <br><a onclick=read(); style="cursor:pointer" class="btn btn-block btn-lg btn-info">Parsed Code</a>
         </form>
         <tr>
             <td colspan="8" height="800" align="center" style="padding-top:100px;">
-                <div class="title">Board</div>
+                <div class="title" style="width: 100%;">Board</div>
                 <iframe src="http://uj06102.dothome.co.kr/gnuboard4/"
-                    width="1080" frameborder="0"  height="600"></iframe>
+                    width="100%" style="max-width: 640px;" frameborder="0" align="center" height="600"></iframe>
             </td>
         </tr>
         <footer>
