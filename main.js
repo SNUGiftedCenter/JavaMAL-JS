@@ -565,8 +565,10 @@ function showPos() {
     ;
 }
 function zplus(){
-    see+=0.1;
+    see+=0.2;
+    document.getElementById('in').value = (see+5).toFixed(1);  
 }
 function zminus(){
-    see-=0.1;
+    see-=0.2;
+    document.getElementById('in').value = (see+5).toFixed(1);  
 }
