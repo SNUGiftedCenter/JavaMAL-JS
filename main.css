@@ -23,30 +23,28 @@ body {
 }
 
 .inputformstyle {
-  background-color: #e1e1e1;
-  color:            #565656;
+  color: #b2bcc5;
+  background-color: #ffffff;
   width:            100%;
- max-width:        640px;
+  max-width:        640px;
+ border-radius: 6px;
 }
 
 .outputformstyle {
   background-color: #191919;
   color:            #6ac0fe;
   width:            100%;
- max-width:        640px;
+  max-width:        640px;
 }
 
 .title {
   font-family:      'Nanum Gothic', sans-serif;
   font-weight:      400;
   font-size:        30px;
-  color:            #3a96d8;
-
+  color:      #3498DB;
   padding-top:      20px;
   padding-bottom:   0px;
-  padding-left:     15px;
-  padding-right:    20px;
-
+  width:            100%;
   margin-bottom:    10px;
 }
 
@@ -54,20 +52,13 @@ body {
   font-family:      'Anton', sans-serif;
   font-weight:      100;
   font-size:        80px;
-  color:            #ffffff;
+  color:      #ffffff;
   background-color: #3a96d8;
-
   padding-top:      20px;
   padding-bottom:   10px;
-  padding-left:     15px;
-  padding-right:    20px;
-
   width:            100%;
- max-width:        610px;
-
   margin-bottom:    10px;
-
-  text-align:       right;
+  text-align:       center;
 }
 
 p {
@@ -87,7 +78,6 @@ footer {
   padding:          10px;
   padding-right:    20px;
   margin-top:       40px;
-  
   background-color: #FFFFFF;
 }
 
