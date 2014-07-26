@@ -16,6 +16,10 @@ var yr=3.17;
 var see=-4;
 var oldx=10,oldy=10;
 
+
+/**
+* This function runs the program
+*/
 function run() {
     gobuttonClick();
     var size = document.getElementById('in').value;
